@@ -6,7 +6,7 @@
 /*   By: mrouves <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/08 11:14:30 by mrouves           #+#    #+#             */
-/*   Updated: 2024/10/10 10:56:47 by mrouves          ###   ########.fr       */
+/*   Updated: 2024/12/03 21:56:04 by mrouves          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@ int		ft_tolower(int c);
 int		ft_toupper(int c);
 char	*ft_strdup(const char *src);
 void	*ft_calloc(size_t nmemb, size_t size);
+void	*ft_realloc(void *ptr, size_t nsize, size_t osize);
 char	*ft_substr(char const *s, unsigned int start, size_t len);
 char	*ft_strtrim(char const *s1, char const *set);
 char	**ft_split(char const *s, char c);

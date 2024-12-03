@@ -6,7 +6,7 @@
 #    By: mrouves <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/08 18:27:35 by mrouves           #+#    #+#              #
-#    Updated: 2024/11/21 18:38:50 by mrouves          ###   ########.fr        #
+#    Updated: 2024/12/03 21:57:44 by mrouves          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,6 +35,7 @@ SRCS			:= ft_atoi.c\
 					ft_strnstr.c\
 					ft_strdup.c\
 					ft_calloc.c\
+					ft_realloc.c\
 					ft_itoa.c\
 					ft_strjoin.c\
 					ft_putchar_fd.c\
