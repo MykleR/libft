@@ -6,11 +6,11 @@
 /*   By: mrouves <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/17 10:03:03 by mrouves           #+#    #+#             */
-/*   Updated: 2024/10/21 11:51:49 by mrouves          ###   ########.fr       */
+/*   Updated: 2024/12/04 13:19:58 by mrouves          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include <libft_string.h>
 
 static char	*ft_strchr_eol(const char *s, int c, int endptr)
 {

@@ -6,11 +6,11 @@
 /*   By: mrouves <mrouves@42angouleme.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 21:56:57 by mrouves           #+#    #+#             */
-/*   Updated: 2024/12/03 21:57:19 by mrouves          ###   ########.fr       */
+/*   Updated: 2024/12/04 13:12:26 by mrouves          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include <libft_allocs.h>
 
 void	*ft_realloc(void *ptr, size_t old_size, size_t new_size)
 {

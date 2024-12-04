@@ -1,27 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memcmp.c                                        :+:      :+:    :+:   */
+/*   ft_memmove.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mrouves <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/08 11:34:02 by mrouves           #+#    #+#             */
-/*   Updated: 2024/10/10 14:17:14 by mrouves          ###   ########.fr       */
+/*   Created: 2024/10/08 11:32:24 by mrouves           #+#    #+#             */
+/*   Updated: 2024/12/04 13:12:09 by mrouves          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include <libft_allocs.h>
 
-int	ft_memcmp(const void *s1, const void *s2, size_t n)
+void	*ft_memmove(void *dst, const void *src, size_t n)
 {
-	const unsigned char	*str1;
-	const unsigned char	*str2;
+	unsigned char	*cdst;
+	unsigned char	*csrc;
 
-	str1 = (const unsigned char *)s1;
-	str2 = (const unsigned char *)s2;
-	while (n && *str1++ == *str2++)
-		n--;
-	if (n)
-		return (*(str1 - 1) - *(str2 - 1));
-	return (0);
+	if (!dst && !src)
+		return (NULL);
+	cdst = (unsigned char *)dst + n - 1;
+	csrc = (unsigned char *)src + n - 1;
+	if (dst <= src)
+		ft_memcpy(dst, src, n);
+	else
+	{
+		while (n--)
+			*cdst-- = *csrc--;
+	}
+	return (dst);
 }

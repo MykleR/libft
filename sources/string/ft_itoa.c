@@ -1,31 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strjoin.c                                       :+:      :+:    :+:   */
+/*   ft_itoa.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mrouves <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/09 12:56:45 by mrouves           #+#    #+#             */
-/*   Updated: 2024/10/10 12:51:41 by mrouves          ###   ########.fr       */
+/*   Created: 2024/10/09 12:34:27 by mrouves           #+#    #+#             */
+/*   Updated: 2024/12/04 13:15:47 by mrouves          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include <libft_string.h>
 
-char	*ft_strjoin(char const *s1, char const *s2)
+static size_t	ft_putnbr(unsigned int n, char *save)
 {
-	char	*result;
-	int		len_s1;
-	int		len_s2;
+	size_t	count;
 
-	if (!s1 || !s2)
-		return (NULL);
-	len_s1 = ft_strlen(s1);
-	len_s2 = ft_strlen(s2);
-	result = ft_calloc(len_s1 + len_s2 + 1, sizeof(char));
-	if (!result)
-		return (NULL);
-	ft_strlcpy(result, s1, len_s1 + 1);
-	ft_strlcpy(result + len_s1, s2, len_s2 + 1);
-	return (result);
+	count = 0;
+	if (n >= 10)
+		count = ft_putnbr(n / 10, save);
+	save[count] = (n % 10) + '0';
+	return (count + 1);
+}
+
+char	*ft_itoa(int n)
+{
+	char	result[12];
+
+	ft_memset(result, 0, 12);
+	result[0] = '-';
+	ft_putnbr(n * ((n >= 0) - (n < 0)), result + (n < 0));
+	return (ft_strdup(result));
 }

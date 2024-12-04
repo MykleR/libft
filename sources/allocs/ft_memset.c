@@ -1,27 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memchr.c                                        :+:      :+:    :+:   */
+/*   ft_memset.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mrouves <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/08 11:33:55 by mrouves           #+#    #+#             */
-/*   Updated: 2024/10/11 10:32:53 by mrouves          ###   ########.fr       */
+/*   Created: 2024/10/08 11:31:57 by mrouves           #+#    #+#             */
+/*   Updated: 2024/12/04 13:12:18 by mrouves          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include <libft_allocs.h>
 
-void	*ft_memchr(const void *s, int c, size_t n)
+void	*ft_memset(void *s, int c, size_t n)
 {
-	const unsigned char	*str;
-	unsigned char		val;
+	unsigned char	*mem;
+	unsigned char	val;
 
-	str = (const unsigned char *)s;
+	mem = (unsigned char *)s;
 	val = (unsigned char)c;
-	while (n && *str++ != val)
-		n--;
-	if (n)
-		return ((void *)(str - 1));
-	return (NULL);
+	while (n--)
+		*mem++ = val;
+	return (s);
 }

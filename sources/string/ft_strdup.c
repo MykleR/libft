@@ -1,32 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memmove.c                                       :+:      :+:    :+:   */
+/*   ft_strdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mrouves <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/08 11:32:24 by mrouves           #+#    #+#             */
-/*   Updated: 2024/10/10 09:57:07 by mrouves          ###   ########.fr       */
+/*   Created: 2024/10/08 20:11:01 by mrouves           #+#    #+#             */
+/*   Updated: 2024/12/04 13:16:33 by mrouves          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include <libft_string.h>
 
-void	*ft_memmove(void *dst, const void *src, size_t n)
+char	*ft_strdup(const char *src)
 {
-	unsigned char	*cdst;
-	unsigned char	*csrc;
+	char	*result;
+	size_t	len;
 
-	if (!dst && !src)
+	len = ft_strlen(src);
+	result = malloc((len + 1) * sizeof(char));
+	if (!result)
 		return (NULL);
-	cdst = (unsigned char *)dst + n - 1;
-	csrc = (unsigned char *)src + n - 1;
-	if (dst <= src)
-		ft_memcpy(dst, src, n);
-	else
-	{
-		while (n--)
-			*cdst-- = *csrc--;
-	}
-	return (dst);
+	ft_memcpy(result, src, len);
+	*(result + len) = '\0';
+	return (result);
 }

@@ -6,11 +6,11 @@
 /*   By: mrouves <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/09 19:29:27 by mrouves           #+#    #+#             */
-/*   Updated: 2024/10/10 09:40:06 by mrouves          ###   ########.fr       */
+/*   Updated: 2024/12/04 13:13:20 by mrouves          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include <libft_prints.h>
 
 int	ft_putnbr_base_fd(uint64_t n, uint8_t base, const char *table, int fd)
 {

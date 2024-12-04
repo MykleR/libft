@@ -1,27 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memcpy.c                                        :+:      :+:    :+:   */
+/*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mrouves <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/08 11:32:15 by mrouves           #+#    #+#             */
-/*   Updated: 2024/10/10 09:57:15 by mrouves          ###   ########.fr       */
+/*   Created: 2024/10/08 11:34:18 by mrouves           #+#    #+#             */
+/*   Updated: 2024/12/04 13:15:06 by mrouves          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include <libft_string.h>
 
-void	*ft_memcpy(void *dst, const void *src, size_t n)
+int	ft_atoi(const char *s)
 {
-	unsigned char	*d;
-	unsigned char	*s;
+	int	result;
+	int	sign;
 
-	if (!dst && !src)
-		return (NULL);
-	d = (unsigned char *)dst;
-	s = (unsigned char *)src;
-	while (n--)
-		*d++ = *s++;
-	return (dst);
+	result = 0;
+	while ((*s >= '\t' && *s <= '\r') || *s == ' ')
+		s++;
+	sign = (*s != '-') - (*s == '-');
+	s += (*s == '-' || *s == '+');
+	while (ft_isdigit(*s))
+		result = (result << 3) + (result << 1) + (*s++) - '0';
+	return (result * sign);
 }
