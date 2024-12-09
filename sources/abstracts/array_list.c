@@ -6,7 +6,7 @@
 /*   By: mrouves <mrouves@42angouleme.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 21:46:46 by mrouves           #+#    #+#             */
-/*   Updated: 2024/12/04 13:10:19 by mrouves          ###   ########.fr       */
+/*   Updated: 2024/12/09 18:45:55 by mykle            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	array_list_destroy(t_array_list *list)
 
 void	array_list_remove(t_array_list *list, uint32_t index)
 {
-	if (__builtin_expect(!list || index >= list->len, 0))
+	if (__builtin_expect(!list || !list->data || index >= list->len, 0))
 		return ;
 	list->len--;
 	ft_memcpy(list->data + list->len * list->mem,
@@ -44,7 +44,8 @@ void	array_list_insert(t_array_list *list, void *ptr)
 {
 	uint32_t	new_size;
 
-	if (__builtin_expect(!list || !ptr || list->len >= UINT32_MAX, 0))
+	if (__builtin_expect(!list || !list->data || !ptr
+			|| list->len >= UINT32_MAX, 0))
 		return ;
 	if (__builtin_expect(list->len >= list->cap, 0))
 	{
@@ -53,6 +54,8 @@ void	array_list_insert(t_array_list *list, void *ptr)
 			new_size = UINT32_MAX;
 		list->data = ft_realloc(list->data, list->cap * list->mem,
 				new_size * list->mem);
+		if (!list->data)
+			return ;
 		list->cap = new_size;
 	}
 	ft_memcpy(list->data + list->len * list->mem, ptr, list->mem);
@@ -61,7 +64,7 @@ void	array_list_insert(t_array_list *list, void *ptr)
 
 void	*array_list_get(t_array_list *list, uint32_t index)
 {
-	if (__builtin_expect(!list || index >= list->len, 0))
+	if (__builtin_expect(!list || !list->data || index >= list->len, 0))
 		return (NULL);
 	return (list->data + index * list->mem);
 }
