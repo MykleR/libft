@@ -6,11 +6,11 @@
 /*   By: mrouves <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/09 14:04:22 by mrouves           #+#    #+#             */
-/*   Updated: 2024/12/11 14:22:38 by mrouves          ###   ########.fr       */
+/*   Updated: 2024/12/11 14:28:04 by mrouves          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include <libft_string.h>
 
 static size_t	ft_separate(char const *s, char c, char **save)
 {
@@ -39,6 +39,8 @@ void	ft_split_free(char **s)
 {
 	char	**start;
 
+	if (__builtin_expect(!s, 0))
+		return ;
 	start = s;
 	while (*s)
 		free(*s++);
@@ -50,14 +52,14 @@ char	**ft_split(char const *s, char c)
 	char	**result;
 	size_t	len;
 
-	if (!s)
+	if (__builtin_expect(!s, 0))
 		return (NULL);
 	len = ft_separate(s, c, 0);
 	result = malloc((len + 1) * sizeof(char *));
-	if (!result)
+	if (__builtin_expect(!result, 0))
 		return (NULL);
 	result[len] = NULL;
-	if (ft_separate(s, c, result) == len)
+	if (__builtin_expect(ft_separate(s, c, result) == len, 1))
 		return (result);
 	ft_split_free(result);
 	return (NULL);
