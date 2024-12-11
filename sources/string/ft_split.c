@@ -6,7 +6,7 @@
 /*   By: mrouves <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/09 14:04:22 by mrouves           #+#    #+#             */
-/*   Updated: 2024/10/10 12:53:29 by mrouves          ###   ########.fr       */
+/*   Updated: 2024/12/11 14:22:38 by mrouves          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ static size_t	ft_separate(char const *s, char c, char **save)
 	return (count);
 }
 
-static void	ft_free_split(char **s)
+void	ft_split_free(char **s)
 {
 	char	**start;
 
@@ -59,6 +59,6 @@ char	**ft_split(char const *s, char c)
 	result[len] = NULL;
 	if (ft_separate(s, c, result) == len)
 		return (result);
-	ft_free_split(result);
+	ft_split_free(result);
 	return (NULL);
 }
