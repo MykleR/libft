@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mem_dynamic_cache.c                                :+:      :+:    :+:   */
+/*   mem_static_cache.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mykle <mykle@42angouleme.fr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 19:49:42 by mykle             #+#    #+#             */
-/*   Updated: 2024/12/09 20:44:30 by mykle            ###   ########.fr       */
+/*   Updated: 2024/12/15 16:46:08 by mrouves          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ static void	cache_destroy(void)
 	cache->len = 0;
 }
 
-void	*dc_malloc(size_t size)
+void	*sc_malloc(size_t size)
 {
 	t_mem_static_cache	*cache;
 	void				*ptr;
@@ -55,7 +55,7 @@ void	*dc_malloc(size_t size)
 	return (ptr);
 }
 
-void	dc_free(void *ptr)
+void	sc_free(void *ptr)
 {
 	t_mem_static_cache	*cache;
 	size_t				index;
