@@ -6,7 +6,7 @@
 /*   By: mrouves <mrouves@42angouleme.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 12:31:30 by mrouves           #+#    #+#             */
-/*   Updated: 2024/12/09 20:47:07 by mykle            ###   ########.fr       */
+/*   Updated: 2024/12/15 16:35:31 by mrouves          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,5 +45,7 @@ void	*sc_malloc(size_t size);
 void	*dc_malloc(size_t size);
 void	sc_free(void *ptr);
 void	dc_free(void *ptr);
+void	*dc_realloc(void *ptr, size_t old_size, size_t new_size);
+void	*sc_realloc(void *ptr, size_t old_size, size_t new_size);
 
 #endif
