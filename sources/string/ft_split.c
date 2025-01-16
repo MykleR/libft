@@ -6,7 +6,7 @@
 /*   By: mrouves <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/09 14:04:22 by mrouves           #+#    #+#             */
-/*   Updated: 2024/12/11 14:28:04 by mrouves          ###   ########.fr       */
+/*   Updated: 2025/01/16 16:39:11 by mrouves          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,8 @@ void	ft_split_free(char **s)
 		return ;
 	start = s;
 	while (*s)
-		free(*s++);
-	free(start);
+		alloc_f(*s++);
+	alloc_f(start);
 }
 
 char	**ft_split(char const *s, char c)
@@ -55,7 +55,7 @@ char	**ft_split(char const *s, char c)
 	if (__builtin_expect(!s, 0))
 		return (NULL);
 	len = ft_separate(s, c, 0);
-	result = malloc((len + 1) * sizeof(char *));
+	result = alloc_m((len + 1) * sizeof(char *));
 	if (__builtin_expect(!result, 0))
 		return (NULL);
 	result[len] = NULL;

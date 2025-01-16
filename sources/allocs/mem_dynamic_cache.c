@@ -6,7 +6,7 @@
 /*   By: mykle <mykle@42angouleme.fr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 19:49:42 by mykle             #+#    #+#             */
-/*   Updated: 2024/12/09 20:36:38 by mykle            ###   ########.fr       */
+/*   Updated: 2025/01/16 17:36:24 by mrouves          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,10 @@ static t_mem_dynamic_cache	*cache_get(int init)
 
 	if (__builtin_expect(cache.cap || !init, 1))
 		return (&cache);
-	cache.allocs = ft_calloc(CACHE_DYNAMIC_INIT, sizeof(void *));
+	cache.allocs = malloc(CACHE_DYNAMIC_INIT * sizeof(void *));
 	if (!cache.allocs)
 		exit(1);
+	ft_memset(cache.allocs, 0, CACHE_DYNAMIC_INIT * sizeof(void *));
 	cache.cap = CACHE_DYNAMIC_INIT;
 	return (&cache);
 }
@@ -49,9 +50,10 @@ static void	cache_realloc(t_mem_dynamic_cache *cache)
 
 	if (__builtin_expect((((uint32_t)(cache->cap << 1)) >> 1) != cache->cap, 0))
 		exit(1);
-	new_allocs = ft_calloc(cache->cap << 1, sizeof(void *));
+	new_allocs = malloc((cache->cap << 1) * sizeof(void *));
 	if (__builtin_expect(!new_allocs, 0))
 		exit(1);
+	ft_memset(new_allocs, 0, (cache->cap << 1) * sizeof(void *));
 	cache->cap <<= 1;
 	i = -1;
 	while (++i < cache->len)

@@ -1,28 +1,43 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_realloc.c                                       :+:      :+:    :+:   */
+/*   alloc.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mrouves <mrouves@42angouleme.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/03 21:56:57 by mrouves           #+#    #+#             */
-/*   Updated: 2025/01/16 17:29:42 by mrouves          ###   ########.fr       */
+/*   Created: 2025/01/16 16:18:14 by mrouves           #+#    #+#             */
+/*   Updated: 2025/01/16 21:53:33 by mrouves          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <libft_allocs.h>
 
-void	*ft_realloc(void *ptr, size_t new_size, size_t old_size)
-{
-	void	*result;
+#if CACHE_MODE == NO_CACHE
 
-	if (__builtin_expect(!ptr, 0))
-		return (alloc_m(new_size));
-	if (__builtin_expect(old_size >= new_size, 0))
-		return (ptr);
-	result = alloc_m(new_size);
-	if (__builtin_expect(result != NULL, 1))
-		ft_memmove(result, ptr, old_size);
-	alloc_f(ptr);
-	return (result);
+void	*alloc_m(size_t size)
+{
+	return (malloc(size));
 }
+
+void	alloc_f(void *ptr)
+{
+	free(ptr);
+}
+
+#else
+
+void	*alloc_m(size_t size)
+{
+	if (CACHE_MODE == DC_CACHE)
+		return (dc_malloc(size));
+	return (sc_malloc(size));
+}
+
+void	alloc_f(void *ptr)
+{
+	if (CACHE_MODE == DC_CACHE)
+		dc_free(ptr);
+	sc_free(ptr);
+}
+
+#endif

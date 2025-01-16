@@ -6,11 +6,11 @@
 /*   By: mrouves <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/09 17:20:19 by mrouves           #+#    #+#             */
-/*   Updated: 2024/10/10 12:51:02 by mrouves          ###   ########.fr       */
+/*   Updated: 2025/01/16 16:52:53 by mrouves          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include <libft_string.h>
 
 static int	ft_isset(char const *set, char c)
 {

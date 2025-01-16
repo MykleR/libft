@@ -6,7 +6,7 @@
 /*   By: mrouves <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/17 10:03:03 by mrouves           #+#    #+#             */
-/*   Updated: 2024/12/04 13:19:58 by mrouves          ###   ########.fr       */
+/*   Updated: 2025/01/16 16:53:26 by mrouves          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,12 +29,12 @@ static char	*ft_strjoin_f1(char *s1, char const *s2)
 
 	len_s1 = ft_strlen(s1);
 	len_s2 = ft_strlen(s2);
-	result = malloc((len_s1 + len_s2 + 1) * sizeof(char));
+	result = alloc_m((len_s1 + len_s2 + 1) * sizeof(char));
 	if (result && s1)
 		ft_memcpy(result, s1, len_s1);
 	if (result && s2)
 		ft_memcpy(result + len_s1, s2, len_s2);
-	free(s1);
+	alloc_f(s1);
 	if (result)
 		result[len_s1 + len_s2] = 0;
 	return (result);
@@ -50,7 +50,7 @@ static char	*ft_substr_safe(const char *s, unsigned int start, size_t len)
 	length = ft_strlen(s);
 	if (len > length)
 		len = length;
-	result = malloc((len + 1) * sizeof(char));
+	result = alloc_m((len + 1) * sizeof(char));
 	if (!result)
 		return (NULL);
 	ft_memcpy(result, s + start, len);
@@ -63,7 +63,7 @@ static int	ft_read_content(char **prev, int fd)
 	char	*buf;
 	ssize_t	rd_bytes;
 
-	buf = malloc((BUFFER_SIZE + 1) * sizeof(char));
+	buf = alloc_m((BUFFER_SIZE + 1) * sizeof(char));
 	if (!buf)
 		return (0);
 	rd_bytes = read(fd, buf, BUFFER_SIZE);
@@ -77,7 +77,7 @@ static int	ft_read_content(char **prev, int fd)
 			break ;
 		rd_bytes = read(fd, buf, BUFFER_SIZE);
 	}
-	free(buf);
+	alloc_f(buf);
 	return (rd_bytes != -1);
 }
 
@@ -96,7 +96,7 @@ char	*get_next_line(int fd)
 		line = ft_substr_safe(content, 0, end - content);
 		tmp = ft_substr_safe(end, 0, ft_strlen(end));
 	}
-	free(content);
+	alloc_f(content);
 	content = tmp;
 	return (line);
 }

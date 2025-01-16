@@ -6,11 +6,12 @@
 #    By: mrouves <mrouves@42angouleme.fr>           +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/12/04 12:23:09 by mrouves           #+#    #+#              #
-#    Updated: 2024/12/09 20:46:22 by mykle            ###   ########.fr        #
+#    Updated: 2025/01/16 17:17:45 by mrouves          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-SRCS			:=	allocs/ft_memcpy.c\
+SRCS			:=	allocs/alloc.c\
+					allocs/ft_memcpy.c\
 					allocs/ft_memset.c\
 					allocs/ft_memmove.c\
 					allocs/ft_bzero.c\
@@ -50,3 +51,6 @@ SRCS			:=	allocs/ft_memcpy.c\
 					prints/ft_putnbr_fd.c\
 					prints/ft_printf.c\
 					abstracts/array_list.c\
+					abstracts/collection_instance.c\
+					abstracts/collection_accessor.c\
+					abstracts/collection_process.c\

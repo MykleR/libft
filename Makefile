@@ -6,13 +6,13 @@
 #    By: mrouves <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/08 18:27:35 by mrouves           #+#    #+#              #
-#    Updated: 2024/12/06 16:30:15 by mrouves          ###   ########.fr        #
+#    Updated: 2025/01/16 21:18:03 by mrouves          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME 			:= libft.a
-
 include sources/sources.mk
+
+NAME 			:= libft.a
 
 DIR_OBJS		:= .objs
 DIR_SOURCES		:= sources
@@ -20,7 +20,8 @@ DIR_HEADERS		:= headers
 OBJS			:= $(addprefix $(DIR_OBJS)/, $(SRCS:%.c=%.o))
 
 CC				:= cc
-CFLAGS			:= -Wall -Wextra -Werror
+CACHE_MODE		?= 0
+CFLAGS			:= -Wall -Wextra -Werror -D CACHE_MODE=$(CACHE_MODE)
 IFLAGS			:= -I $(DIR_HEADERS)
 
 GREEN			= \033[0;32m

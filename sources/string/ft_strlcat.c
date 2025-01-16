@@ -6,11 +6,11 @@
 /*   By: mrouves <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/08 11:32:59 by mrouves           #+#    #+#             */
-/*   Updated: 2024/10/10 15:45:01 by mrouves          ###   ########.fr       */
+/*   Updated: 2025/01/16 16:39:58 by mrouves          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include <libft_string.h>
 
 size_t	ft_strlcat(char *dst, const char *src, size_t size)
 {

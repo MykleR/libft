@@ -6,18 +6,11 @@
 /*   By: mrouves <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/11 18:03:06 by mrouves           #+#    #+#             */
-/*   Updated: 2024/12/04 13:14:36 by mrouves          ###   ########.fr       */
+/*   Updated: 2025/01/16 17:01:42 by mrouves          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <libft_prints.h>
-
-static int	ft_putptr(uintptr_t ptr, int fd)
-{
-	if (!ptr)
-		return (ft_putstr_pfd("(nil)", fd));
-	return (ft_putstr_pfd("0x", fd) + ft_putnbr_base_fd(ptr, 16, LHEX, fd));
-}
 
 static int	ft_handle(const char c, va_list args, int fd)
 {
@@ -30,7 +23,7 @@ static int	ft_handle(const char c, va_list args, int fd)
 	if (c == 's')
 		return (ft_putstr_pfd(va_arg(args, char *), fd));
 	if (c == 'p')
-		return (ft_putptr(va_arg(args, uintptr_t), fd));
+		return (ft_putptr_pfd(va_arg(args, uintptr_t), fd));
 	if (c == 'u')
 		return (ft_putnbr_base_fd(va_arg(args, unsigned int), 10, DEC, fd));
 	if (c == 'x')
@@ -69,7 +62,20 @@ static int	ft_parse(const char *format, va_list args, int fd)
 	return (printed);
 }
 
-int	ft_printf(int fd, const char *format, ...)
+int	ft_printf(const char *format, ...)
+{
+	va_list	args;
+	int		printed;
+
+	if (!format)
+		return (-1);
+	va_start(args, format);
+	printed = ft_parse(format, args, 1);
+	va_end(args);
+	return (printed);
+}
+
+int	ft_dprintf(int fd, const char *format, ...)
 {
 	va_list	args;
 	int		printed;
