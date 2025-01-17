@@ -6,7 +6,7 @@
 /*   By: mrouves <mrouves@42angouleme.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/16 15:37:53 by mrouves           #+#    #+#             */
-/*   Updated: 2025/01/16 17:03:01 by mrouves          ###   ########.fr       */
+/*   Updated: 2025/01/17 01:18:04 by mrouves          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,9 @@ void	collection_destroy(t_collection *c, void (*del)(void *))
 	if (__builtin_expect(!c || !c->data, 0))
 		return ;
 	i = -1;
-	while (del && ++i < c->len)
-		del(*(void **)(c->data + c->mem * i));
+	while (del && ++i < c->cap)
+		if (*(void **)(c->data + c->mem * i))
+			del(*(void **)(c->data + c->mem * i));
 	alloc_f(c->data);
 	c->cap = 0;
 	c->len = 0;

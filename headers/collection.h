@@ -6,7 +6,7 @@
 /*   By: mrouves <mrouves@42angouleme.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/16 15:21:48 by mrouves           #+#    #+#             */
-/*   Updated: 2025/01/16 16:06:48 by mrouves          ###   ########.fr       */
+/*   Updated: 2025/01/17 00:33:03 by mrouves          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,9 +41,12 @@ void			collection_iter(t_collection *c, void *arg,
 
 void			collection_append(t_collection *c, void *ptr);
 void			collection_insert(t_collection *c, void *ptr, uint32_t index);
-void			collection_delete(t_collection *c, uint32_t index,
+
+void			collection_rplast(t_collection *c, uint32_t index,
 					void (*del)(void *));
 void			collection_remove(t_collection *c, uint32_t index,
+					void (*del)(void *));
+void			collection_vanish(t_collection *c, uint32_t index,
 					void (*del)(void *));
 
 #endif

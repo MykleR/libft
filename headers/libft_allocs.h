@@ -6,7 +6,7 @@
 /*   By: mrouves <mrouves@42angouleme.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 12:31:30 by mrouves           #+#    #+#             */
-/*   Updated: 2025/01/16 21:07:26 by mrouves          ###   ########.fr       */
+/*   Updated: 2025/01/17 01:14:07 by mrouves          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 # include <stdint.h>
 
 # define CACHE_STATIC_MAX 0x10000
-# define CACHE_DYNAMIC_INIT 0x1000
+# define CACHE_DYNAMIC_INIT 0x100
 
 # define NO_CACHE 0
 # define DC_CACHE 1

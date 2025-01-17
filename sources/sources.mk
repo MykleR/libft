@@ -6,7 +6,7 @@
 #    By: mrouves <mrouves@42angouleme.fr>           +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/12/04 12:23:09 by mrouves           #+#    #+#              #
-#    Updated: 2025/01/16 17:17:45 by mrouves          ###   ########.fr        #
+#    Updated: 2025/01/17 00:26:41 by mrouves          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -53,4 +53,5 @@ SRCS			:=	allocs/alloc.c\
 					abstracts/array_list.c\
 					abstracts/collection_instance.c\
 					abstracts/collection_accessor.c\
-					abstracts/collection_process.c\
+					abstracts/collection_addition.c\
+					abstracts/collection_deletion.c\
