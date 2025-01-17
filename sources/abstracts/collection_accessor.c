@@ -6,7 +6,7 @@
 /*   By: mrouves <mrouves@42angouleme.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/16 15:50:02 by mrouves           #+#    #+#             */
-/*   Updated: 2025/01/16 17:17:16 by mrouves          ###   ########.fr       */
+/*   Updated: 2025/01/17 13:32:46 by mrouves          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,13 +26,12 @@ void	collection_set(t_collection *c, uint32_t index, void *ptr)
 	ft_memmove(c->data + c->mem * index, ptr, c->mem);
 }
 
-void	collection_replace(t_collection *c, uint32_t index,
-			void *ptr, void (*del)(void *))
+void	collection_replace(t_collection *c, uint32_t index, void *ptr)
 {
 	if (__builtin_expect(!c || !c->data || index >= c->len, 0))
 		return ;
-	if (del)
-		del(*(void **)(c->data + index * c->mem));
+	if (c->free_f)
+		c->free_f(*(void **)(c->data + index * c->mem));
 	ft_memmove(c->data + c->mem * index, ptr, c->mem);
 }
 
@@ -48,10 +47,10 @@ void	collection_iter(t_collection *c, void *arg,
 		iter(c->data + c->mem * i, arg);
 }
 
-void	collection_clear(t_collection *c, void (*del)(void *))
+void	collection_clear(t_collection *c)
 {
 	if (__builtin_expect(!c || !c->data || !c->len, 0))
 		return ;
 	while (c->len--)
-		del(c->data + c->mem * c->len);
+		collection_vanish(c, c->len);
 }
