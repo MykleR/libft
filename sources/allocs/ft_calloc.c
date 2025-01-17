@@ -6,7 +6,7 @@
 /*   By: mrouves <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/08 20:18:07 by mrouves           #+#    #+#             */
-/*   Updated: 2025/01/16 20:54:41 by mrouves          ###   ########.fr       */
+/*   Updated: 2025/01/17 15:53:08 by mykle            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	*ft_calloc(size_t nmemb, size_t size)
 	fsize = size * nmemb;
 	if (__builtin_expect(nmemb || fsize / nmemb == size, 1))
 		result = alloc_m(fsize);
-	if (__builtin_expect(!result, 0))
+	if (__builtin_expect(result != NULL, 1))
 		ft_memset(result, 0, nmemb * size);
 	return (result);
 }
