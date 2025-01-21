@@ -6,7 +6,7 @@
 /*   By: mykle <mykle@42angouleme.fr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/21 00:26:30 by mykle             #+#    #+#             */
-/*   Updated: 2025/01/21 01:03:59 by mykle            ###   ########.fr       */
+/*   Updated: 2025/01/21 15:05:09 by mrouves          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,9 +49,9 @@ uint32_t	hash(const char *data, int len)
 	uint32_t	tmp;
 	int			rem;
 
-	hash = len;
 	if (len <= 0 || data == NULL)
 		return (0);
+	hash = len;
 	rem = len & 3;
 	len >>= 2;
 	while (len--)
@@ -59,7 +59,7 @@ uint32_t	hash(const char *data, int len)
 		hash += get16bits(data);
 		tmp = (get16bits(data + 2) << 11) ^ hash;
 		hash = (hash << 16) ^ tmp;
-		data += 2 * sizeof(uint16_t);
+		data += (sizeof(uint16_t) << 1);
 		hash += hash >> 11;
 	}
 	hash = shift_rem(data, hash, rem);

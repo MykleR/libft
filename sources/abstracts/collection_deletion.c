@@ -6,7 +6,7 @@
 /*   By: mrouves <mrouves@42angouleme.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/17 00:21:47 by mrouves           #+#    #+#             */
-/*   Updated: 2025/01/17 13:32:35 by mrouves          ###   ########.fr       */
+/*   Updated: 2025/01/21 15:16:18 by mrouves          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,10 @@ void	collection_vanish(t_collection *c, uint32_t index)
 	if (__builtin_expect(!c || !c->data || index >= c->cap || !c->len, 0))
 		return ;
 	c->len--;
-	if (c->free_f && *(void **)(c->data + c->mem * index))
-		c->free_f(*(void **)(c->data + c->mem * index));
+	if (c->clear.type == T_STACK)
+		c->clear.func(c->data + c->mem * index);
+	else if (*(void **)(c->data + c->mem * index))
+		c->clear.func(*(void **)(c->data + c->mem * index));
 	ft_memset(c->data + c->mem * index, 0, c->mem);
 }
 

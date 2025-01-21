@@ -6,15 +6,29 @@
 /*   By: mykle <mykle@42angouleme.fr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/21 00:22:48 by mykle             #+#    #+#             */
-/*   Updated: 2025/01/21 00:56:59 by mykle            ###   ########.fr       */
+/*   Updated: 2025/01/21 17:31:36 by mrouves          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <hashmap.h>
 
-bool	hm_create(t_collection *h, uint32_t cap)
+static void	__bucket_clear(void *ptr)
 {
-	uint32_t		i;
+	t_hm_bucket	*bucket;
+
+	bucket = ptr;
+	if (!bucket)
+		return ;
+	collection_destroy(&bucket->keys);
+	collection_destroy(&bucket->values);
+}
+
+bool	hm_create(t_hm *h, uint32_t cap, size_t mem, t_clear_info info)
+{
+	static t_clear_info	keys_clr = {alloc_f, T_HEAP};
+	static t_clear_info	bckt_clr = {__bucket_clear, T_STACK};
+	t_hm_bucket			*bckt;
+	bool				success;
 
 	cap--;
 	cap |= cap >> 1;
@@ -23,50 +37,68 @@ bool	hm_create(t_collection *h, uint32_t cap)
 	cap |= cap >> 8;
 	cap |= cap >> 16;
 	cap++;
-	if (__builtin_expect(!h || !cap, 0))
+	if (__builtin_expect(!h || !cap || !mem, 0))
 		return (false);
-	if (!collection_create(h, sizeof(t_collection **), cap,
-			(void (*)(void *))collection_free))
-		return (false);
-	i = -1;
-	while (++i < cap)
-		collection_append(h, &((t_collection *){
-				collection_instance(sizeof(t_hm_entry), 2, NULL)}));
-	return (true);
+	success = collection_create(h, sizeof(t_hm_bucket), cap, bckt_clr);
+	while (success && h->len < cap)
+	{
+		bckt = ((t_hm_bucket *)h->data) + h->len++;
+		success &= collection_create(&bckt->keys, sizeof(void *), 2, keys_clr);
+		success &= collection_create(&bckt->values, mem, 2, info);
+	}
+	if (!success)
+		collection_destroy(h);
+	return (success);
 }
 
-void	*hm_get(t_collection *h, const char *key)
+static inline uint32_t	hm_query(t_hm *h, const char *key,
+							t_collection **out_keys, t_collection **out_vals)
 {
-	t_collection	*query;
+	uint32_t		index;
+	t_collection	*keys;
+	t_collection	*vals;
+
+	index = hash(key, ft_strlen(key)) & (h->cap - 1);
+	keys = &(((t_hm_bucket *)h->data) + index)->keys;
+	vals = &(((t_hm_bucket *)h->data) + index)->values;
+	if (out_vals)
+		*out_vals = vals;
+	if (out_keys)
+		*out_keys = keys;
+	index = 0;
+	while (index < keys->len && ft_strcmp(
+			(*(char **)keys->data + index), key))
+		index++;
+	return (index);
+}
+
+void	*hm_get(t_hm *h, const char *key)
+{
+	t_collection	*vals;
 	uint32_t		index;
 
 	if (__builtin_expect(!h || !key, 0))
 		return (NULL);
-	index = hash(key, ft_strlen(key)) & (h->cap - 1);
-	query = *(((t_collection **)h->data) + index);
-	index = 0;
-	while (index < query->len && ft_strcmp(
-			(((t_hm_entry *)query->data) + index)->key, key))
-		index++;
-	if (__builtin_expect(index < query->len, 1))
-		return ((((t_hm_entry *)query->data) + index)->value);
+	index = hm_query(h, key, NULL, &vals);
+	if (__builtin_expect(index < vals->len, 1))
+		return (vals->data + h->mem * index);
 	return (NULL);
 }
 
-void	hm_set(t_collection *h, const char *key, void *val)
+void	hm_set(t_hm *h, const char *key, void *val)
 {
-	t_collection	*query;
+	t_collection	*vals;
+	t_collection	*keys;
 	uint32_t		index;
 
 	if (__builtin_expect(!h || !key, 0))
 		return ;
-	index = hash(key, ft_strlen(key)) & (h->cap - 1);
-	query = *(((t_collection **)h->data) + index);
-	index = 0;
-	while (index < query->len && ft_strcmp(
-			(((t_hm_entry *)query->data) + index)->key, key))
-		index++;
-	if (index >= query->len)
-		collection_append(query, &((t_hm_entry){key, val}));
-	(((t_hm_entry *)query->data) + index)->value = val;
+	index = hm_query(h, key, &keys, &vals);
+	if (index >= vals->len)
+	{
+		collection_append(vals, val);
+		collection_append(keys, &((char *){ft_strdup(key)}));
+	}
+	else
+		collection_replace(vals, index, val);
 }

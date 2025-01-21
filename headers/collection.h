@@ -6,7 +6,7 @@
 /*   By: mrouves <mrouves@42angouleme.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/16 15:21:48 by mrouves           #+#    #+#             */
-/*   Updated: 2025/01/17 14:44:32 by mrouves          ###   ########.fr       */
+/*   Updated: 2025/01/21 14:52:26 by mrouves          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,18 +19,31 @@
 
 typedef void	(*t_free)(void *);
 
+typedef enum e_clear_type
+{
+	T_HEAP,
+	T_STACK,
+}	t_clear_type;
+
+typedef struct s_clear_info
+{
+	t_free			func;
+	t_clear_type	type;
+}	t_clear_info;
+
 typedef struct s_collection
 {
-	void		*data;
-	t_free		free_f;
-	uint32_t	mem;
-	uint32_t	len;
-	uint32_t	cap;
+	void			*data;
+	t_clear_info	clear;
+	uint32_t		mem;
+	uint32_t		len;
+	uint32_t		cap;
 }	t_collection;
 
-t_collection	*collection_instance(uint32_t mem, uint32_t cap, t_free f);
+t_collection	*collection_instance(uint32_t mem, uint32_t cap,
+					t_clear_info clear);
 bool			collection_create(t_collection *c, uint32_t mem,
-					uint32_t cap, t_free f);
+					uint32_t cap, t_clear_info clear);
 
 void			collection_destroy(t_collection *c);
 void			collection_free(t_collection *c);

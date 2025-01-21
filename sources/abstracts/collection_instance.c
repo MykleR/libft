@@ -6,36 +6,37 @@
 /*   By: mrouves <mrouves@42angouleme.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/16 15:37:53 by mrouves           #+#    #+#             */
-/*   Updated: 2025/01/17 13:28:46 by mrouves          ###   ########.fr       */
+/*   Updated: 2025/01/21 15:03:51 by mrouves          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <collection.h>
 
 static inline bool	collection_fill(t_collection *c, uint32_t mem,
-						uint32_t cap, t_free f)
+						uint32_t cap, t_clear_info clear)
 {
 	c->len = 0;
 	c->cap = cap;
 	c->mem = mem;
-	c->free_f = f;
+	c->clear = clear;
 	c->data = ft_calloc(mem, cap);
 	return (c->data != NULL);
 }
 
 bool	collection_create(t_collection *c, uint32_t mem,
-			uint32_t cap, t_free f)
+			uint32_t cap, t_clear_info clear)
 {
-	return (c && mem && cap && collection_fill(c, mem, cap, f));
+	return (c && mem && cap && collection_fill(c, mem, cap, clear));
 }
 
-t_collection	*collection_instance(uint32_t mem, uint32_t cap, t_free f)
+t_collection	*collection_instance(uint32_t mem, uint32_t cap,
+					t_clear_info clear)
 {
 	t_collection	*res;
 
 	res = alloc_m(sizeof(t_collection));
 	if (__builtin_expect(mem && cap && res
-			&& collection_fill(res, mem, cap, f), 1))
+			&& collection_fill(res, mem, cap, clear), 1))
 		return (res);
 	alloc_f(res);
 	return (NULL);
@@ -48,14 +49,10 @@ void	collection_destroy(t_collection *c)
 	if (__builtin_expect(!c || !c->data, 0))
 		return ;
 	i = -1;
-	while (c->free_f && ++i < c->cap)
-		if (*(void **)(c->data + c->mem * i))
-			c->free_f(*(void **)(c->data + c->mem * i));
+	while (c->clear.func && ++i < c->cap)
+		collection_vanish(c, i);
 	alloc_f(c->data);
-	c->cap = 0;
-	c->len = 0;
-	c->mem = 0;
-	c->data = 0;
+	ft_memset(c, 0, sizeof(t_collection));
 }
 
 void	collection_free(t_collection *c)
