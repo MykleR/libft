@@ -6,7 +6,7 @@
 /*   By: mykle <mykle@42angouleme.fr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/21 00:22:48 by mykle             #+#    #+#             */
-/*   Updated: 2025/01/21 17:31:36 by mrouves          ###   ########.fr       */
+/*   Updated: 2025/01/21 21:39:49 by mrouves          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,22 +52,16 @@ bool	hm_create(t_hm *h, uint32_t cap, size_t mem, t_clear_info info)
 }
 
 static inline uint32_t	hm_query(t_hm *h, const char *key,
-							t_collection **out_keys, t_collection **out_vals)
+							t_collection **keys, t_collection **vals)
 {
 	uint32_t		index;
-	t_collection	*keys;
-	t_collection	*vals;
 
 	index = hash(key, ft_strlen(key)) & (h->cap - 1);
-	keys = &(((t_hm_bucket *)h->data) + index)->keys;
-	vals = &(((t_hm_bucket *)h->data) + index)->values;
-	if (out_vals)
-		*out_vals = vals;
-	if (out_keys)
-		*out_keys = keys;
+	*keys = &(((t_hm_bucket *)h->data) + index)->keys;
+	*vals = &(((t_hm_bucket *)h->data) + index)->values;
 	index = 0;
-	while (index < keys->len && ft_strcmp(
-			(*(char **)keys->data + index), key))
+	while (index < (*keys)->len && ft_strcmp(
+			(*(char **)(*keys)->data + index), key))
 		index++;
 	return (index);
 }
@@ -75,11 +69,12 @@ static inline uint32_t	hm_query(t_hm *h, const char *key,
 void	*hm_get(t_hm *h, const char *key)
 {
 	t_collection	*vals;
+	t_collection	*keys;
 	uint32_t		index;
 
 	if (__builtin_expect(!h || !key, 0))
 		return (NULL);
-	index = hm_query(h, key, NULL, &vals);
+	index = hm_query(h, key, &keys, &vals);
 	if (__builtin_expect(index < vals->len, 1))
 		return (vals->data + h->mem * index);
 	return (NULL);

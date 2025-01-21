@@ -6,7 +6,7 @@
 /*   By: mrouves <mrouves@42angouleme.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/16 15:50:02 by mrouves           #+#    #+#             */
-/*   Updated: 2025/01/21 14:58:16 by mrouves          ###   ########.fr       */
+/*   Updated: 2025/01/21 21:52:32 by mrouves          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ void	collection_replace(t_collection *c, uint32_t index, void *ptr)
 	if (__builtin_expect(!c || !c->data || index >= c->len, 0))
 		return ;
 	collection_vanish(c, index);
+	c->len++;
 	ft_memmove(c->data + c->mem * index, ptr, c->mem);
 }
 
@@ -48,8 +49,11 @@ void	collection_iter(t_collection *c, void *arg,
 
 void	collection_clear(t_collection *c)
 {
+	uint32_t	i;
+
 	if (__builtin_expect(!c || !c->data || !c->len, 0))
 		return ;
-	while (c->len--)
-		collection_vanish(c, c->len);
+	i = -1;
+	while (++i < c->cap)
+		collection_vanish(c, i);
 }
