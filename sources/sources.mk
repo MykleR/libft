@@ -6,7 +6,7 @@
 #    By: mrouves <mrouves@42angouleme.fr>           +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/12/04 12:23:09 by mrouves           #+#    #+#              #
-#    Updated: 2025/01/17 00:26:41 by mrouves          ###   ########.fr        #
+#    Updated: 2025/01/21 00:55:18 by mykle            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -55,3 +55,5 @@ SRCS			:=	allocs/alloc.c\
 					abstracts/collection_accessor.c\
 					abstracts/collection_addition.c\
 					abstracts/collection_deletion.c\
+					abstracts/hashmap.c\
+					abstracts/hash.c\
