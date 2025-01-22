@@ -6,7 +6,7 @@
 /*   By: mykle <mykle@42angouleme.fr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/21 00:22:48 by mykle             #+#    #+#             */
-/*   Updated: 2025/01/21 21:39:49 by mrouves          ###   ########.fr       */
+/*   Updated: 2025/01/22 20:22:41 by mrouves          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ static inline uint32_t	hm_query(t_hm *h, const char *key,
 	*vals = &(((t_hm_bucket *)h->data) + index)->values;
 	index = 0;
 	while (index < (*keys)->len && ft_strcmp(
-			(*(char **)(*keys)->data + index), key))
+			*((char **)(*keys)->data + index), key))
 		index++;
 	return (index);
 }
@@ -76,7 +76,7 @@ void	*hm_get(t_hm *h, const char *key)
 		return (NULL);
 	index = hm_query(h, key, &keys, &vals);
 	if (__builtin_expect(index < vals->len, 1))
-		return (vals->data + h->mem * index);
+		return (vals->data + vals->mem * index);
 	return (NULL);
 }
 
