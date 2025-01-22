@@ -6,7 +6,7 @@
 /*   By: mrouves <mrouves@42angouleme.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 12:39:01 by mrouves           #+#    #+#             */
-/*   Updated: 2025/01/21 00:25:52 by mykle            ###   ########.fr       */
+/*   Updated: 2025/01/22 14:55:11 by mrouves          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@
 # endif
 
 int		ft_isalpha(int c);
+int		ft_isspace(int c);
 int		ft_isalnum(int c);
 int		ft_isascii(int c);
 int		ft_isdigit(int c);
