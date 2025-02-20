@@ -6,7 +6,7 @@
 #    By: mrouves <mrouves@42angouleme.fr>           +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/12/04 12:23:09 by mrouves           #+#    #+#              #
-#    Updated: 2025/01/22 14:54:47 by mrouves          ###   ########.fr        #
+#    Updated: 2025/02/18 21:17:34 by mrouves          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -51,10 +51,10 @@ SRCS			:=	allocs/alloc.c\
 					prints/ft_putendl_fd.c\
 					prints/ft_putnbr_fd.c\
 					prints/ft_printf.c\
-					abstracts/array_list.c\
 					abstracts/collection_instance.c\
 					abstracts/collection_accessor.c\
 					abstracts/collection_addition.c\
 					abstracts/collection_deletion.c\
 					abstracts/hashmap.c\
 					abstracts/hash.c\
+					abstracts/stack.c\
