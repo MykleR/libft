@@ -6,7 +6,7 @@
 /*   By: mrouves <mrouves@42angouleme.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 12:31:30 by mrouves           #+#    #+#             */
-/*   Updated: 2025/01/17 01:14:07 by mrouves          ###   ########.fr       */
+/*   Updated: 2025/02/25 14:01:00 by mrouves          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@
 
 # define CACHE_STATIC_MAX 0x10000
 # define CACHE_DYNAMIC_INIT 0x100
+# define CACHE_FULL_MSG "Warning: static cache full, exiting safely...\n"
+# define CACHE_FAIL_MSG "Warning: malloc failed, exiting safely...\n"
 
 # define NO_CACHE 0
 # define DC_CACHE 1

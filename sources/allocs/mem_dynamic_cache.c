@@ -6,11 +6,12 @@
 /*   By: mykle <mykle@42angouleme.fr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 19:49:42 by mykle             #+#    #+#             */
-/*   Updated: 2025/01/16 17:36:24 by mrouves          ###   ########.fr       */
+/*   Updated: 2025/02/25 13:55:53 by mrouves          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <libft_allocs.h>
+#include <unistd.h>
 
 static t_mem_dynamic_cache	*cache_get(int init)
 {
@@ -75,7 +76,10 @@ void	*dc_malloc(size_t size)
 
 	ptr = malloc(size);
 	if (__builtin_expect(!ptr, 0))
+	{
+		write(2, CACHE_FAIL_MSG, sizeof(CACHE_FAIL_MSG));
 		exit(1);
+	}
 	cache = cache_get(1);
 	if (__builtin_expect(cache->len >= cache->cap, 0))
 		cache_realloc(cache);

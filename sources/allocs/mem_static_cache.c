@@ -6,11 +6,12 @@
 /*   By: mykle <mykle@42angouleme.fr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 19:49:42 by mykle             #+#    #+#             */
-/*   Updated: 2025/01/16 17:36:47 by mrouves          ###   ########.fr       */
+/*   Updated: 2025/02/25 13:56:44 by mrouves          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <libft_allocs.h>
+#include <unistd.h>
 
 static t_mem_static_cache	*cache_get(void)
 {
@@ -43,10 +44,16 @@ void	*sc_malloc(size_t size)
 
 	cache = cache_get();
 	if (__builtin_expect(cache->len >= CACHE_STATIC_MAX, 0))
+	{
+		write(2, CACHE_FULL_MSG, sizeof(CACHE_FULL_MSG));
 		exit(1);
+	}
 	ptr = malloc(size);
 	if (__builtin_expect(!ptr, 0))
+	{
+		write(2, CACHE_FAIL_MSG, sizeof(CACHE_FAIL_MSG));
 		exit(1);
+	}
 	index = ((uintptr_t)ptr) & (CACHE_STATIC_MAX - 1);
 	while (cache->allocs[index] != 0)
 		index = (index + 1) & (CACHE_STATIC_MAX - 1);
