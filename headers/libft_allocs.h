@@ -6,7 +6,7 @@
 /*   By: mrouves <mrouves@42angouleme.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 12:31:30 by mrouves           #+#    #+#             */
-/*   Updated: 2025/02/25 14:01:00 by mrouves          ###   ########.fr       */
+/*   Updated: 2025/02/27 18:39:57 by mrouves          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,21 @@
 # include <stdlib.h>
 # include <stdint.h>
 
-# define CACHE_STATIC_MAX 0x10000
-# define CACHE_DYNAMIC_INIT 0x100
+# ifndef CACHE_DEBUG
+#  define CACHE_DEBUG 0
+# endif
+
+# ifndef CACHE_STATIC_MAX
+#  define CACHE_STATIC_MAX 0x10000
+# endif
+
+# ifndef CACHE_DYNAMIC_MAX
+#  define CACHE_DYNAMIC_INIT 0x100
+# endif
+
 # define CACHE_FULL_MSG "Warning: static cache full, exiting safely...\n"
 # define CACHE_FAIL_MSG "Warning: malloc failed, exiting safely...\n"
+# define CACHE_CLR_MSG "Warning: cache automatic clear raised\n"
 
 # define NO_CACHE 0
 # define DC_CACHE 1

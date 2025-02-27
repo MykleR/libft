@@ -6,7 +6,7 @@
 /*   By: mykle <mykle@42angouleme.fr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 19:49:42 by mykle             #+#    #+#             */
-/*   Updated: 2025/02/25 13:55:53 by mrouves          ###   ########.fr       */
+/*   Updated: 2025/02/27 18:39:58 by mrouves          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,8 @@ static void	cache_destroy(void)
 	index = -1;
 	while (++index < cache->cap)
 		free(cache->allocs[index]);
+	if (CACHE_DEBUG && cache->len)
+		write(1, CACHE_CLR_MSG, sizeof(CACHE_CLR_MSG) - 1);
 	cache->len = 0;
 	cache->cap = 0;
 	free(cache->allocs);
@@ -77,7 +79,8 @@ void	*dc_malloc(size_t size)
 	ptr = malloc(size);
 	if (__builtin_expect(!ptr, 0))
 	{
-		write(2, CACHE_FAIL_MSG, sizeof(CACHE_FAIL_MSG));
+		if (CACHE_DEBUG)
+			write(2, CACHE_FAIL_MSG, sizeof(CACHE_FAIL_MSG) - 1);
 		exit(1);
 	}
 	cache = cache_get(1);

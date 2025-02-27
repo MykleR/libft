@@ -6,7 +6,7 @@
 #    By: mrouves <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/08 18:27:35 by mrouves           #+#    #+#              #
-#    Updated: 2025/01/20 23:24:18 by mykle            ###   ########.fr        #
+#    Updated: 2025/02/27 18:44:22 by mrouves          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,7 +21,8 @@ OBJS			:= $(addprefix $(DIR_OBJS)/, $(SRCS:%.c=%.o))
 
 CC				:= cc
 CACHE_MODE		?= 0
-CFLAGS			:= -Wall -Wextra -Werror -g -D CACHE_MODE=$(CACHE_MODE)
+CACHE_DEBUG		?= 0
+CFLAGS			:= -Wall -Wextra -Werror -g -D CACHE_MODE=$(CACHE_MODE) -D CACHE_DEBUG=$(CACHE_DEBUG)
 IFLAGS			:= -I $(DIR_HEADERS)
 
 GREEN			= \033[0;32m
