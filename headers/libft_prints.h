@@ -6,7 +6,7 @@
 /*   By: mrouves <mrouves@42angouleme.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 12:35:38 by mrouves           #+#    #+#             */
-/*   Updated: 2025/01/16 16:57:37 by mrouves          ###   ########.fr       */
+/*   Updated: 2025/03/07 00:28:44 by mykle            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ int		ft_putstr_pfd(const char *s, int fd);
 int		ft_putptr_pfd(uintptr_t ptr, int fd);
 int		ft_putnbr_base_fd(uint64_t n, uint8_t base, const char *table, int fd);
 
+int		ft_vdprintf(int fd, const char *s, va_list ap);
 int		ft_dprintf(int fd, const char *s, ...);
 int		ft_printf(const char *s, ...);
 

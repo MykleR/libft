@@ -6,7 +6,7 @@
 /*   By: mrouves <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/11 18:03:06 by mrouves           #+#    #+#             */
-/*   Updated: 2025/01/16 17:01:42 by mrouves          ###   ########.fr       */
+/*   Updated: 2025/03/07 00:28:03 by mykle            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ static int	ft_percent(const char **format, va_list args, int fd)
 	return (handled);
 }
 
-static int	ft_parse(const char *format, va_list args, int fd)
+int	ft_vprintf(int fd, const char *format, va_list args)
 {
 	int	printed;
 
@@ -70,7 +70,7 @@ int	ft_printf(const char *format, ...)
 	if (!format)
 		return (-1);
 	va_start(args, format);
-	printed = ft_parse(format, args, 1);
+	printed = ft_vprintf(1, format, args);
 	va_end(args);
 	return (printed);
 }
@@ -83,7 +83,7 @@ int	ft_dprintf(int fd, const char *format, ...)
 	if (!format || fd < 0)
 		return (-1);
 	va_start(args, format);
-	printed = ft_parse(format, args, fd);
+	printed = ft_vprintf(fd, format, args);
 	va_end(args);
 	return (printed);
 }
