@@ -6,7 +6,7 @@
 /*   By: mrouves <mrouves@42angouleme.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/16 15:50:02 by mrouves           #+#    #+#             */
-/*   Updated: 2025/01/21 21:52:32 by mrouves          ###   ########.fr       */
+/*   Updated: 2025/03/06 15:55:37 by mykle            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void	collection_iter(t_collection *c, void *arg,
 {
 	uint32_t	i;
 
-	if (__builtin_expect(!c || !c->data || !c->len, 0))
+	if (__builtin_expect(!c || !c->data || !c->len || !iter, 0))
 		return ;
 	i = -1;
 	while (++i < c->len)
