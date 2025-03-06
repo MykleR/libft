@@ -1,55 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   hashmap.c                                          :+:      :+:    :+:   */
+/*   hashmap_accessor.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mykle <mykle@42angouleme.fr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/21 00:22:48 by mykle             #+#    #+#             */
-/*   Updated: 2025/03/06 15:53:31 by mykle            ###   ########.fr       */
+/*   Updated: 2025/03/06 18:39:53 by mykle            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <hashmap.h>
-
-static void	__bucket_clear(void *ptr)
-{
-	t_hmap_bucket	*bucket;
-
-	bucket = ptr;
-	if (!bucket)
-		return ;
-	collection_destroy(&bucket->keys);
-	collection_destroy(&bucket->values);
-}
-
-bool	hmap_create(t_hmap *h, uint32_t cap, size_t mem, t_clear_info info)
-{
-	static t_clear_info	keys_clr = {alloc_f, T_HEAP};
-	static t_clear_info	bckt_clr = {__bucket_clear, T_STACK};
-	t_hmap_bucket		*bckt;
-	bool				success;
-
-	cap--;
-	cap |= cap >> 1;
-	cap |= cap >> 2;
-	cap |= cap >> 4;
-	cap |= cap >> 8;
-	cap |= cap >> 16;
-	cap++;
-	if (__builtin_expect(!h || !cap || !mem, 0))
-		return (false);
-	success = collection_create(h, sizeof(t_hmap_bucket), cap, bckt_clr);
-	while (success && h->len < cap)
-	{
-		bckt = ((t_hmap_bucket *)h->data) + h->len++;
-		success &= collection_create(&bckt->keys, sizeof(void *), 2, keys_clr);
-		success &= collection_create(&bckt->values, mem, 2, info);
-	}
-	if (!success)
-		collection_destroy(h);
-	return (success);
-}
 
 static inline uint32_t	hmap_query(t_hmap *h, const char *key,
 							t_collection **keys, t_collection **vals)
@@ -96,4 +57,20 @@ void	hmap_set(t_hmap *h, const char *key, void *val)
 	}
 	else
 		collection_replace(vals, index, val);
+}
+
+void	hmap_unset(t_hmap *h, const char *key)
+{
+	t_collection	*vals;
+	t_collection	*keys;
+	uint32_t		index;
+
+	if (__builtin_expect(!h || !key, 0))
+		return ;
+	index = hmap_query(h, key, &keys, &vals);
+	if (index < vals->len)
+	{
+		collection_rplast(keys, index);
+		collection_rplast(vals, index);
+	}
 }

@@ -6,7 +6,7 @@
 /*   By: mrouves <mrouves@42angouleme.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/16 15:21:48 by mrouves           #+#    #+#             */
-/*   Updated: 2025/01/21 14:52:26 by mrouves          ###   ########.fr       */
+/*   Updated: 2025/03/06 18:42:19 by mykle            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,9 +40,9 @@ typedef struct s_collection
 	uint32_t		cap;
 }	t_collection;
 
-t_collection	*collection_instance(uint32_t mem, uint32_t cap,
+t_collection	*collection_create(uint32_t mem, uint32_t cap,
 					t_clear_info clear);
-bool			collection_create(t_collection *c, uint32_t mem,
+bool			collection_init(t_collection *c, uint32_t mem,
 					uint32_t cap, t_clear_info clear);
 
 void			collection_destroy(t_collection *c);

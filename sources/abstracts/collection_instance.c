@@ -6,7 +6,7 @@
 /*   By: mrouves <mrouves@42angouleme.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/16 15:37:53 by mrouves           #+#    #+#             */
-/*   Updated: 2025/01/21 15:03:51 by mrouves          ###   ########.fr       */
+/*   Updated: 2025/03/06 18:41:31 by mykle            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,13 +23,13 @@ static inline bool	collection_fill(t_collection *c, uint32_t mem,
 	return (c->data != NULL);
 }
 
-bool	collection_create(t_collection *c, uint32_t mem,
+bool	collection_init(t_collection *c, uint32_t mem,
 			uint32_t cap, t_clear_info clear)
 {
 	return (c && mem && cap && collection_fill(c, mem, cap, clear));
 }
 
-t_collection	*collection_instance(uint32_t mem, uint32_t cap,
+t_collection	*collection_create(uint32_t mem, uint32_t cap,
 					t_clear_info clear)
 {
 	t_collection	*res;
