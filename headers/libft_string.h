@@ -6,7 +6,7 @@
 /*   By: mrouves <mrouves@42angouleme.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 12:39:01 by mrouves           #+#    #+#             */
-/*   Updated: 2025/01/22 14:55:11 by mrouves          ###   ########.fr       */
+/*   Updated: 2025/03/07 02:37:17 by mykle            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,8 @@ int		ft_tolower(int c);
 int		ft_toupper(int c);
 int		ft_atoi(const char *nptr);
 bool	ft_safe_atoi(const char *s, int32_t *out);
+bool	ft_safe_atou64(const char *s, uint64_t *out);
+bool	ft_safe_atoi64(const char *s, int64_t	*out);
 
 char	*ft_itoa(int n);
 char	*ft_strdup(const char *src);
