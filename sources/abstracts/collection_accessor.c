@@ -6,7 +6,7 @@
 /*   By: mrouves <mrouves@42angouleme.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/16 15:50:02 by mrouves           #+#    #+#             */
-/*   Updated: 2025/03/06 15:55:37 by mykle            ###   ########.fr       */
+/*   Updated: 2025/03/12 02:37:24 by mrouves          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,7 @@ void	collection_replace(t_collection *c, uint32_t index, void *ptr)
 	ft_memmove(c->data + c->mem * index, ptr, c->mem);
 }
 
-void	collection_iter(t_collection *c, void *arg,
-			void (*iter)(void *, void *))
+void	collection_iter(t_collection *c, void *arg, t_iter_callb iter)
 {
 	uint32_t	i;
 

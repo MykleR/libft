@@ -6,7 +6,7 @@
 /*   By: mrouves <mrouves@42angouleme.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/16 15:21:48 by mrouves           #+#    #+#             */
-/*   Updated: 2025/03/06 18:42:19 by mykle            ###   ########.fr       */
+/*   Updated: 2025/03/12 02:36:36 by mrouves          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include <stdint.h>
 
 typedef void	(*t_free)(void *);
+typedef void	(*t_iter_callb)(void *, void *);
 
 typedef enum e_clear_type
 {
@@ -52,8 +53,7 @@ void			collection_clear(t_collection *c);
 void			*collection_get(t_collection *c, uint32_t i);
 void			collection_set(t_collection *c, uint32_t i, void *p);
 void			collection_replace(t_collection *c, uint32_t i, void *p);
-void			collection_iter(t_collection *c, void *arg,
-					void (*iter)(void *, void *));
+void			collection_iter(t_collection *c, void *arg, t_iter_callb f);
 
 void			collection_append(t_collection *c, void *p);
 void			collection_insert(t_collection *c, void *p, uint32_t i);
