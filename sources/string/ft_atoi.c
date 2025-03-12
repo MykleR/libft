@@ -6,7 +6,7 @@
 /*   By: mrouves <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/08 11:34:18 by mrouves           #+#    #+#             */
-/*   Updated: 2025/03/07 02:38:18 by mykle            ###   ########.fr       */
+/*   Updated: 2025/03/12 00:56:32 by mrouves          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ bool	ft_safe_atoi64(const char *s, int64_t	*out)
 	while ((*s >= '\t' && *s <= '\r') || *s == ' ')
 		s++;
 	sign = (*s != '-') - (*s == '-');
-	s += sign < 0;
+	s += (*s == '-' || *s == '+');
 	if (!ft_safe_atou64(s, &convert) || convert - (sign < 0) > INT64_MAX)
 		return (false);
 	*out = convert * sign;
@@ -76,7 +76,7 @@ bool	ft_safe_atou64(const char *s, uint64_t *out)
 	while (*s)
 	{
 		overflow = (*out << 3) + (*out << 1) + (*s - '0');
-		if (!ft_isdigit(*s++) || overflow <= *out)
+		if (!ft_isdigit(*s++) || overflow < *out)
 			return (false);
 		*out = overflow;
 	}
