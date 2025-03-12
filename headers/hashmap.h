@@ -6,7 +6,7 @@
 /*   By: mykle <mykle@42angouleme.fr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/21 00:23:11 by mykle             #+#    #+#             */
-/*   Updated: 2025/03/06 18:45:45 by mykle            ###   ########.fr       */
+/*   Updated: 2025/03/12 01:18:34 by mrouves          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,5 +31,6 @@ void		*hmap_get(t_hmap *h, const char *key);
 void		hmap_unset(t_hmap *h, const char *key);
 void		hmap_set(t_hmap *h, const char *key, void *val);
 void		hmap_destroy(t_hmap *h);
+uint32_t	hmap_len(t_hmap *h);
 
 #endif

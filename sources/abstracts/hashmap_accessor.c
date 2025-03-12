@@ -6,7 +6,7 @@
 /*   By: mykle <mykle@42angouleme.fr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/21 00:22:48 by mykle             #+#    #+#             */
-/*   Updated: 2025/03/06 18:39:53 by mykle            ###   ########.fr       */
+/*   Updated: 2025/03/12 01:17:58 by mrouves          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,4 +73,18 @@ void	hmap_unset(t_hmap *h, const char *key)
 		collection_rplast(keys, index);
 		collection_rplast(vals, index);
 	}
+}
+
+uint32_t	hmap_len(t_hmap *h)
+{
+	uint32_t		i;
+	uint32_t		len;
+
+	if (__builtin_expect(!h, 0))
+		return (0);
+	len = 0;
+	i = -1;
+	while (++i < h->cap)
+		len += ((t_hmap_bucket *)h->data + i)->keys.len;
+	return (len);
 }
