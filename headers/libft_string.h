@@ -6,7 +6,7 @@
 /*   By: mrouves <mrouves@42angouleme.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 12:39:01 by mrouves           #+#    #+#             */
-/*   Updated: 2025/03/07 02:37:17 by mykle            ###   ########.fr       */
+/*   Updated: 2025/03/13 04:19:23 by mrouves          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ char	*ft_strrchr(const char *s, int c);
 char	**ft_split(char const *s, char c);
 void	ft_split_free(char **split);
 char	*ft_strjoin(char const *s1, char const *s2);
+char	*ft_strjoins(const char **strings, int n, const char *sep);
 char	*ft_strtrim(char const *s1, char const *set);
 char	*ft_substr(char const *s, unsigned int start, size_t len);
 char	*ft_strnstr(const char *big, const char *little, size_t len);
