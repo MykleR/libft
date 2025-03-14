@@ -6,7 +6,7 @@
 /*   By: mrouves <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/09 12:34:27 by mrouves           #+#    #+#             */
-/*   Updated: 2024/12/04 13:15:47 by mrouves          ###   ########.fr       */
+/*   Updated: 2025/03/14 02:26:26 by mykle            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,12 +23,17 @@ static size_t	ft_putnbr(unsigned int n, char *save)
 	return (count + 1);
 }
 
+void	ft_itoa_buf(int n, char buf[static 12])
+{
+	ft_memset(buf, 0, 12);
+	buf[0] = '-';
+	ft_putnbr(n * ((n >= 0) - (n < 0)), buf + (n < 0));
+}
+
 char	*ft_itoa(int n)
 {
 	char	result[12];
 
-	ft_memset(result, 0, 12);
-	result[0] = '-';
-	ft_putnbr(n * ((n >= 0) - (n < 0)), result + (n < 0));
+	ft_itoa_buf(n, result);
 	return (ft_strdup(result));
 }
