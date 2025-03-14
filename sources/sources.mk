@@ -6,7 +6,7 @@
 #    By: mrouves <mrouves@42angouleme.fr>           +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/12/04 12:23:09 by mrouves           #+#    #+#              #
-#    Updated: 2025/03/06 18:40:34 by mykle            ###   ########.fr        #
+#    Updated: 2025/03/14 06:11:45 by mykle            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,6 +38,7 @@ SRCS			:=	allocs/alloc.c\
 					string/ft_strlcpy.c\
 					string/ft_strnstr.c\
 					string/ft_strdup.c\
+					string/ft_strtok.c\
 					string/ft_itoa.c\
 					string/ft_strjoin.c\
 					string/ft_split.c\
