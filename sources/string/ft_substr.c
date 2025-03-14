@@ -6,7 +6,7 @@
 /*   By: mrouves <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/09 15:38:49 by mrouves           #+#    #+#             */
-/*   Updated: 2025/01/16 16:53:02 by mrouves          ###   ########.fr       */
+/*   Updated: 2025/03/14 17:49:14 by mykle            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ char	*ft_substr(const char *s, unsigned int start, size_t len)
 	char	*result;
 	size_t	length;
 
-	if (!s || start > ft_strlen(s))
+	if (!s || !len || start >= ft_strlen(s))
 		return (ft_calloc(1, 1));
 	length = ft_strlen(s + start);
 	if (len > length)
