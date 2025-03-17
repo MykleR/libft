@@ -6,13 +6,13 @@
 /*   By: mykle <mykle@42angouleme.fr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/17 03:28:49 by mykle             #+#    #+#             */
-/*   Updated: 2025/03/17 04:17:53 by mykle            ###   ########.fr       */
+/*   Updated: 2025/03/17 04:29:03 by mykle            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <libft_string.h>
 
-static int	count_replacements(char *orig, char *rep)
+static int	count_replacements(const char *orig, const char *rep)
 {
 	int		count;
 	char	*ins;
@@ -34,7 +34,8 @@ static int	count_replacements(char *orig, char *rep)
 	return (count);
 }
 
-static char	*replace_all(char *orig, char *rep, char *with, char *result)
+static char	*replace_all(const char *orig, const char *rep,
+				const char *with, char *result)
 {
 	char	*ins;
 	char	*tmp;
@@ -58,14 +59,14 @@ static char	*replace_all(char *orig, char *rep, char *with, char *result)
 	return (result);
 }
 
-char	*ft_strreplace(char *orig, char *rep, char *with)
+char	*ft_strreplace(const char *orig, const char *rep, const char *with)
 {
 	char	*result;
 	int		count;
 
 	count = count_replacements(orig, rep);
 	if (!count)
-		return (orig);
+		return ((char *)orig);
 	if (!with)
 		with = "";
 	result = alloc_m(ft_strlen(orig)
