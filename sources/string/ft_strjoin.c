@@ -6,7 +6,7 @@
 /*   By: mrouves <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/09 12:56:45 by mrouves           #+#    #+#             */
-/*   Updated: 2025/03/14 17:42:03 by mykle            ###   ########.fr       */
+/*   Updated: 2025/03/17 22:01:45 by mykle            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,16 @@ char	*ft_strjoin(char const *s1, char const *s2)
 		ft_memcpy(result + len_s1, s2, len_s2);
 	if (result)
 		result[len_s1 + len_s2] = 0;
+	return (result);
+}
+
+char	*ft_strjoin_f(char *s1, char *s2)
+{
+	char	*result;
+
+	result = ft_strjoin(s1, s2);
+	alloc_f(s1);
+	alloc_f(s2);
 	return (result);
 }
 
@@ -56,5 +66,15 @@ char	*ft_strjoins(const char **strings, int n, const char *sep)
 		if (i < n - 1)
 			ft_strlcat(result, sep, len);
 	}
+	return (result);
+}
+
+char	*ft_strjoins_f(char **strings, int n, const char *sep)
+{
+	char	*result;
+
+	result = ft_strjoins((const char **)strings, n, sep);
+	while (n--)
+		alloc_f(strings[n]);
 	return (result);
 }
