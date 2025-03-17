@@ -6,7 +6,7 @@
 /*   By: mykle <mykle@42angouleme.fr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/17 03:28:49 by mykle             #+#    #+#             */
-/*   Updated: 2025/03/17 04:07:38 by mykle            ###   ########.fr       */
+/*   Updated: 2025/03/17 04:17:53 by mykle            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,16 +23,16 @@ static int	count_replacements(char *orig, char *rep)
 	len_rep = ft_strlen(rep);
 	if (len_rep == 0)
 		return (0);
-	ins = orig;
 	count = 0;
-	while ((ins = ft_strstr(ins, rep)))
+	ins = ft_strstr(orig, rep);
+	while (ins)
 	{
 		ins += len_rep;
 		count++;
+		ins = ft_strstr(ins, rep);
 	}
 	return (count);
 }
-
 
 static char	*replace_all(char *orig, char *rep, char *with, char *result)
 {
@@ -69,7 +69,7 @@ char	*ft_strreplace(char *orig, char *rep, char *with)
 	if (!with)
 		with = "";
 	result = alloc_m(ft_strlen(orig)
-				+ (ft_strlen(with) - ft_strlen(rep)) * count + 1);
+			+ (ft_strlen(with) - ft_strlen(rep)) * count + 1);
 	if (!result)
 		return (NULL);
 	return (replace_all(orig, rep, with, result));
