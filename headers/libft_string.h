@@ -6,7 +6,7 @@
 /*   By: mrouves <mrouves@42angouleme.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 12:39:01 by mrouves           #+#    #+#             */
-/*   Updated: 2025/03/19 06:15:04 by mrouves          ###   ########.fr       */
+/*   Updated: 2025/03/19 07:07:57 by mrouves          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ int		ft_atoi(const char *nptr);
 bool	ft_safe_atoi(const char *s, int32_t *out);
 bool	ft_safe_atou64(const char *s, uint64_t *out);
 bool	ft_safe_atoi64(const char *s, int64_t	*out);
+bool	ft_isempty(const char *str);
 
 char	*ft_itoa(int n);
 void	ft_itoa_buf(int n, char buf[static 12]);
