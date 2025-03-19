@@ -6,7 +6,7 @@
 /*   By: mrouves <mrouves@42angouleme.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 12:39:01 by mrouves           #+#    #+#             */
-/*   Updated: 2025/03/17 22:03:10 by mykle            ###   ########.fr       */
+/*   Updated: 2025/03/19 06:07:26 by mrouves          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ char	*ft_strstr(const char *big, const char *little);
 char	*ft_strmapi(char const *s, char (*f)(unsigned int, char));
 void	ft_striteri(char *s, void (*f)(unsigned int, char *));
 char	*ft_strreplace(const char *orig, const char *rep, const char *with);
+char	*ft_strremove(const char *str, const char *charset);
 
 size_t	ft_strlen(const char *s);
 size_t	ft_strlcpy(char *dst, const char *src, size_t size);
