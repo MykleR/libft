@@ -6,7 +6,7 @@
 /*   By: mrouves <mrouves@42angouleme.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/19 06:06:57 by mrouves           #+#    #+#             */
-/*   Updated: 2025/03/19 06:09:29 by mrouves          ###   ########.fr       */
+/*   Updated: 2025/03/19 06:14:50 by mrouves          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,4 +39,13 @@ char	*ft_strremove(const char *str, const char *charset)
 	if (!charset || charset[0] == '\0')
 		return (ft_strdup(str));
 	return (filter_chars(str, charset));
+}
+
+char	*ft_strremove_f(char *str, const char *charset)
+{
+	char	*result;
+
+	result = ft_strremove(str, charset);
+	alloc_f(str);
+	return (result);
 }
