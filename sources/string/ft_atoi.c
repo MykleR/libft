@@ -6,7 +6,7 @@
 /*   By: mrouves <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/08 11:34:18 by mrouves           #+#    #+#             */
-/*   Updated: 2025/03/12 00:56:32 by mrouves          ###   ########.fr       */
+/*   Updated: 2025/03/19 14:06:44 by mrouves          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,8 +51,6 @@ bool	ft_safe_atoi64(const char *s, int64_t	*out)
 
 	if (__builtin_expect(!out || !s || !(*s), 0))
 		return (false);
-	while ((*s >= '\t' && *s <= '\r') || *s == ' ')
-		s++;
 	sign = (*s != '-') - (*s == '-');
 	s += (*s == '-' || *s == '+');
 	if (!ft_safe_atou64(s, &convert) || convert - (sign < 0) > INT64_MAX)
