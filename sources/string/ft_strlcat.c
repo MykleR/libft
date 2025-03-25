@@ -6,7 +6,7 @@
 /*   By: mrouves <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/08 11:32:59 by mrouves           #+#    #+#             */
-/*   Updated: 2025/01/16 16:39:58 by mrouves          ###   ########.fr       */
+/*   Updated: 2025/03/25 19:11:11 by mrouves          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,4 +29,17 @@ size_t	ft_strlcat(char *dst, const char *src, size_t size)
 		*ptr++ = *src++;
 	*ptr = '\0';
 	return (dst_length + src_length);
+}
+
+char	*ft_strcat(char *dst, const char *src)
+{
+	char	*tmp_dst;
+
+	tmp_dst = dst;
+	while (*tmp_dst)
+		tmp_dst++;
+	while (*src)
+		*tmp_dst++ = *src++;
+	*tmp_dst = 0;
+	return (dst);
 }

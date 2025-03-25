@@ -6,7 +6,7 @@
 /*   By: mrouves <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/08 11:32:33 by mrouves           #+#    #+#             */
-/*   Updated: 2025/01/16 16:52:01 by mrouves          ###   ########.fr       */
+/*   Updated: 2025/03/25 19:11:44 by mrouves          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,4 +28,15 @@ size_t	ft_strlcpy(char *dst, const char *src, size_t size)
 	if (size)
 		*dst = '\0';
 	return (src - start);
+}
+
+char	*ft_strcpy(char *dest, const char *src)
+{
+	char	*tmp_dest;
+
+	tmp_dest = dest;
+	while (*src)
+		*tmp_dest++ = *src++;
+	*tmp_dest = 0;
+	return (dest);
 }
