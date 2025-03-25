@@ -6,7 +6,7 @@
 #    By: mrouves <mrouves@42angouleme.fr>           +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/12/04 12:23:09 by mrouves           #+#    #+#              #
-#    Updated: 2025/03/19 06:09:22 by mrouves          ###   ########.fr        #
+#    Updated: 2025/03/25 18:23:38 by mrouves          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -41,7 +41,6 @@ SRCS			:=	allocs/alloc.c\
 					string/ft_strnstr.c\
 					string/ft_strdup.c\
 					string/ft_strtok.c\
-					string/ft_itoa.c\
 					string/ft_strjoin.c\
 					string/ft_split.c\
 					string/ft_substr.c\
@@ -54,6 +53,8 @@ SRCS			:=	allocs/alloc.c\
 					prints/ft_putendl_fd.c\
 					prints/ft_putnbr_fd.c\
 					prints/ft_printf.c\
+					numbers/ft_itoa.c\
+					numbers/ft_nbdigits.c\
 					abstracts/collection_instance.c\
 					abstracts/collection_accessor.c\
 					abstracts/collection_addition.c\

@@ -6,11 +6,11 @@
 /*   By: mrouves <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/09 12:34:27 by mrouves           #+#    #+#             */
-/*   Updated: 2025/03/14 02:26:26 by mykle            ###   ########.fr       */
+/*   Updated: 2025/03/25 18:23:06 by mrouves          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <libft_string.h>
+#include <libft_numbers.h>
 
 static size_t	ft_putnbr(unsigned int n, char *save)
 {

@@ -1,24 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   libft.h                                            :+:      :+:    :+:   */
+/*   ft_nbdigits.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mrouves <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: mrouves <mrouves@42angouleme.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/08 11:14:30 by mrouves           #+#    #+#             */
-/*   Updated: 2025/03/25 18:24:01 by mrouves          ###   ########.fr       */
+/*   Created: 2025/03/25 18:22:13 by mrouves           #+#    #+#             */
+/*   Updated: 2025/03/25 18:29:43 by mrouves          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef LIBFT_H
-# define LIBFT_H
+#include <libft_numbers.h>
 
-# include <libft_allocs.h>
-# include <libft_prints.h>
-# include <libft_string.h>
-# include <libft_numbers.h>
-# include <collection.h>
-# include <hashmap.h>
-# include <stack.h>
+int	ft_nbdigits(int n)
+{
+	size_t	count;
 
-#endif
+	count = 1;
+	while (n)
+		count += ((n /= 10) != 0);
+	return (count);
+}
