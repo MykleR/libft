@@ -6,7 +6,7 @@
 /*   By: mykle <mykle@42angouleme.fr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/26 11:17:03 by mykle             #+#    #+#             */
-/*   Updated: 2025/03/26 12:34:15 by mykle            ###   ########.fr       */
+/*   Updated: 2025/03/26 13:02:09 by mykle            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include <unistd.h>
 #include <fcntl.h>
 
-static int *cache_get(void)
+int	*cache_get(void)
 {
 	static int	cache[CACHE_FD_MAX] = {-1};
 
@@ -58,71 +58,12 @@ int	cached_open(const char *pathname, int flags, mode_t mode)
 
 int	cached_close(int fd)
 {
-	int *cache;
+	int	*cache;
 
 	cache = cache_get();
 	if (__builtin_expect(fd < 0 || fd >= CACHE_FD_MAX || cache[fd] == -1, 0))
 		return (-1);
 	close(fd);
 	cache[fd] = -1;
-	return (0);
-}
-
-int	cached_dup(int oldfd)
-{
-	int *cache;
-	int	newfd;
-
-	cache = cache_get();
-	newfd = dup(oldfd);
-	if (__builtin_expect(newfd == -1, 0))
-		return (-1);
-	if (__builtin_expect(newfd >= CACHE_FD_MAX, 0))
-	{
-		close(newfd);
-		return (-1);
-	}
-	cache[newfd] = newfd;
-	return (newfd);
-}
-
-int	cached_dup2(int oldfd, int newfd)
-{
-	int *cache;
-
-	cache = cache_get();
-	if (__builtin_expect(newfd < 0 || newfd >= CACHE_FD_MAX, 0))
-		return (-1);
-	if (__builtin_expect(oldfd == newfd, 0))
-		return (newfd);
-	if (__builtin_expect(cache[newfd] != -1, 0))
-		cached_close(newfd);
-	if (__builtin_expect(dup2(oldfd, newfd) == -1, 0))
-		return (-1);
-	cache[newfd] = newfd;
-	return (newfd);
-}
-
-int	cached_pipe(int pipefd[static 2])
-{
-	int *cache;
-
-	cache = cache_get();
-	if (__builtin_expect(pipe(pipefd) == -1, 0))
-		return (-1);
-	if (__builtin_expect(pipefd[0] >= CACHE_FD_MAX, 0))
-	{
-		close(pipefd[0]);
-		close(pipefd[1]);
-		return (-1);
-	}
-	if (__builtin_expect(pipefd[1] >= CACHE_FD_MAX, 0))
-	{
-		close(pipefd[0]);
-		close(pipefd[1]);
-		return (-1);
-	}
-	cache[pipefd[0]] = pipefd[0];
-	cache[pipefd[1]] = pipefd[1];
 	return (0);
 }

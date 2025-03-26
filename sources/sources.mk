@@ -6,7 +6,7 @@
 #    By: mrouves <mrouves@42angouleme.fr>           +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/12/04 12:23:09 by mrouves           #+#    #+#              #
-#    Updated: 2025/03/26 11:51:41 by mykle            ###   ########.fr        #
+#    Updated: 2025/03/26 13:00:53 by mykle            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,6 +22,7 @@ SRCS			:=	allocs/alloc.c\
 					allocs/mem_dynamic_cache.c\
 					allocs/mem_static_cache.c\
 					allocs/fd_static_cache.c\
+					allocs/fd_static_cache_2.c\
 					string/ft_atoi.c\
 					string/ft_strreplace.c\
 					string/ft_strremove.c\
