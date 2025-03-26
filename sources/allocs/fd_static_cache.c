@@ -6,7 +6,7 @@
 /*   By: mykle <mykle@42angouleme.fr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/26 11:17:03 by mykle             #+#    #+#             */
-/*   Updated: 2025/03/26 11:56:25 by mykle            ###   ########.fr       */
+/*   Updated: 2025/03/26 12:10:48 by mykle            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,7 @@ static void	cache_destroy(void)
 	cache = cache_get();
 	index = -1;
 	while (++index < CACHE_FD_MAX)
-		if (cache[index] != -1)
-			close(cache[index]);
+		cached_close(cache[index]);
 }
 
 int	cached_open(const char *pathname, int flags, mode_t mode)
