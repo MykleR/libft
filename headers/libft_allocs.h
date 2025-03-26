@@ -6,7 +6,7 @@
 /*   By: mrouves <mrouves@42angouleme.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 12:31:30 by mrouves           #+#    #+#             */
-/*   Updated: 2025/02/27 18:39:57 by mrouves          ###   ########.fr       */
+/*   Updated: 2025/03/26 11:26:55 by mykle            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,10 @@
 
 # ifndef CACHE_DYNAMIC_MAX
 #  define CACHE_DYNAMIC_INIT 0x100
+# endif
+
+# ifndef CACHE_FD_MAX
+#  define CACHE_FD_MAX 0x10000
 # endif
 
 # define CACHE_FULL_MSG "Warning: static cache full, exiting safely...\n"
@@ -52,8 +56,19 @@ typedef struct s_mem_static_cache
 	uint32_t	len;
 }	t_mem_static_cache;
 
+typedef struct s_fd_static_cache
+{
+	int			fds[CACHE_FD_MAX];
+	uint32_t	len;
+}	t_fd_static_cache;
+
 void	*alloc_m(size_t size);
 void	alloc_f(void *ptr);
+
+int		cached_open(const char *pathname, int flags, mode_t mode);
+int		cached_close(int fd);
+int		cached_dup(int oldfd);
+int		cached_dup2(int oldfd, int newfd);
 
 void	ft_bzero(void *s, size_t n);
 void	*ft_calloc(size_t nmemb, size_t size);
