@@ -6,7 +6,7 @@
 /*   By: mrouves <mrouves@42angouleme.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 12:31:30 by mrouves           #+#    #+#             */
-/*   Updated: 2025/03/26 12:01:48 by mykle            ###   ########.fr       */
+/*   Updated: 2025/03/26 12:34:25 by mykle            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,8 @@ int		cached_open(const char *pathname, int flags, mode_t mode);
 int		cached_close(int fd);
 int		cached_dup(int oldfd);
 int		cached_dup2(int oldfd, int newfd);
+int		cached_pipe(int pipefd[static 2]);
+void	cache_fd_clear(void);
 
 void	ft_bzero(void *s, size_t n);
 void	*ft_calloc(size_t nmemb, size_t size);

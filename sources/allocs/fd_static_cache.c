@@ -6,7 +6,7 @@
 /*   By: mykle <mykle@42angouleme.fr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/26 11:17:03 by mykle             #+#    #+#             */
-/*   Updated: 2025/03/26 12:10:48 by mykle            ###   ########.fr       */
+/*   Updated: 2025/03/26 12:34:15 by mykle            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,11 @@ static int *cache_get(void)
 
 __attribute__((destructor))
 static void	cache_destroy(void)
+{
+	cache_fd_clear();
+}
+
+void	cache_fd_clear(void)
 {
 	int			*cache;
 	uint32_t	index;
@@ -96,4 +101,28 @@ int	cached_dup2(int oldfd, int newfd)
 		return (-1);
 	cache[newfd] = newfd;
 	return (newfd);
+}
+
+int	cached_pipe(int pipefd[static 2])
+{
+	int *cache;
+
+	cache = cache_get();
+	if (__builtin_expect(pipe(pipefd) == -1, 0))
+		return (-1);
+	if (__builtin_expect(pipefd[0] >= CACHE_FD_MAX, 0))
+	{
+		close(pipefd[0]);
+		close(pipefd[1]);
+		return (-1);
+	}
+	if (__builtin_expect(pipefd[1] >= CACHE_FD_MAX, 0))
+	{
+		close(pipefd[0]);
+		close(pipefd[1]);
+		return (-1);
+	}
+	cache[pipefd[0]] = pipefd[0];
+	cache[pipefd[1]] = pipefd[1];
+	return (0);
 }
